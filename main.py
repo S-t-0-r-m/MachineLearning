@@ -7,6 +7,7 @@ import os
 def main():
     dependent_var = "MEDV"
     independent_var = "RAD"
+    print("hello")
 
     df = read_csv()
     x_df, y_df = splitt_dataframe(df, dependent_var, independent_var)
