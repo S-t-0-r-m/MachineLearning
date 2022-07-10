@@ -1,33 +1,32 @@
 #  CRIM   ZN  INDUS  CHAS NOX  RM   AGE  DIS   RAD  TAX   PTRATIO  B   LSTAT  MEDV
 from regression import Regression
+import feature
+import interface
 import pandas as pd
 import os
 
-
 def main():
-    dependent_var = "MEDV"
-    independent_var = "RAD"
+    dependent_feature = "MEDV"
 
     df = read_csv()
-    x_df, y_df = splitt_dataframe(df, dependent_var, independent_var)
+    test_df, train_df = splitt_dataframe(df)
+    feat_coll = feature.FeatureCollection(train_df, dependent_feature)
+    reg = Regression(feat_coll, dependent_feature)
+    reg.do_regression("single")
 
-    reg = Regression(x_df, y_df, independent_var)
-    reg.linear_regression()
-    reg.print_normalised_plot(independent_var)
 
+def splitt_dataframe(df):
+    lenght = int(df.shape[0] * 0.2)
+    
+    test_df = df[:lenght]
+    train_df = df[lenght:]
 
-def splitt_dataframe(df, dependent_var, independent_var):
-    # x_df = df.drop(columns = dependent_var)
-    # df[independent_var]
-    y_df = df[dependent_var]
-
-    x_df = df[independent_var]
-    return (x_df, y_df)
+    return (test_df, train_df)
 
 
 def read_csv():
 
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "housing.csv"), sep="\s+")
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__),"data","housing.csv"), sep="\s+")
     return df
 
 

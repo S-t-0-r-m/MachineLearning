@@ -1,132 +1,103 @@
-import feature
-import random
-import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import math
-from sympy import *
-import os
 
 
 class Regression:
-    def __init__(
-        self, x_df, y_series, var ,minimum_step_size=0.0001, learning_rate=0.1, sample_size=10, 
-
-    ) -> None:
-        self.sampel_indexes = []
-        self.var = var
+    def __init__(self, feat, dependent_feature, learning_rate=0.01,) -> None:
+        self.all_features = feat
+        self.dep_feature = dependent_feature
         self.learning_rate = learning_rate
-        self.number_training_exaples = y_series.size
-        self.sample_size = int((sample_size/100) * self.number_training_exaples)
-        self.minimum_step_size = minimum_step_size
+        self.minimum_step_size = 0.001
 
-        self.y_feature = feature.DependentFeature(symbols("y"), y_series)
-        self.x_feature_dict = self.create_feature_dict(y_series, x_df)
-
-    def create_feature_dict(self, y_series, x_df):
-        # for series in x_df.loc():
-        # indepen_feature = feature.DependentFeature(symbols("y"), y_series)
-        # step_size_dict[series.name] = indepen_feature
-
-        feature_dict = {}
-
-        # depen_feature = feature.DependentFeature(symbols("y"), y_series)
-        # feature_dict[y_series.name] = depen_feature
-
-        indepen_feature = feature.DependentFeature(symbols("x"), x_df)
-        feature_dict[x_df.name] = indepen_feature
-
-        return feature_dict
-
-
-
-    def create_sample_list(self):
-        self.sampel_indexes = []
-
-        for i in range(0, self.sample_size):
-            index = random.randint(0, (self.number_training_exaples - 1))
-
-            self.sampel_indexes.append(index)
-        
-
-    def check_step_size_above_min(self):
+    def check_step_size_above_min(self, feat_dict):
         step_size_above_min = False
 
-        for key, feature in self.x_feature_dict.items():
+        for key, feature in feat_dict.items():
             if feature.get_step_size() > self.minimum_step_size:
                 step_size_above_min = True
 
-        if self.y_feature.get_step_size() > self.minimum_step_size:
-            step_size_above_min = True
-
         return step_size_above_min
+ 
+    def create_prameter_vector(self, feat_dict, task, name ):# not ready 
+        parm_vec = np.array([])
 
-    def linear_regression(self):
+        for key, featur in feat_dict.items():
 
-        while self.check_step_size_above_min():
-            self.create_sample_list()
+            if task == "single" and key == self.dep_feature:
+                parm_vec = np.append(parm_vec ,featur.get_intry_from_dict(name))
+            else:
+                parm_vec = np.append(parm_vec ,featur.get_mul_parameter())
 
-            self.calc_sum_squared_residuals(self.y_feature)
+        return np.transpose(parm_vec)
 
-            for key , feature in self.x_feature_dict.items():
-                self.calc_sum_squared_residuals(feature) 
+    def create_feature_matrix(self, feat_dict):
+        feat_matx = np.array([])
 
+        for key, featur in feat_dict.items():
 
-    def get_point(self, feature,index):
-        if type(feature) is "DependentFeature":
-            return [
-                feature.get_point(index), 
-                self.y_feature.get_point(index),
-            ]  
-        else:
-            return [
-                feature.get_point(index), 
-                self.y_feature.get_point(index),
-            ]  
+            if key == self.dependent_feature: 
+                feat_matx =  featur.get_ones_vector()
+            else:
+                A = featur.get_series() 
+                feat_matx = np.vstack([feat_matx, A])
+        
+        return np.transpose(feat_matx)
 
+    def do_regression(self,task):
 
-    def calc_sum_squared_residuals(self, feature):
+        if task == "multi" or task == "both":
+            feat_dict = self.all_features.get_feature_dict()
+            self.linear_regression(self,feat_dict, "", "multi")
+
+        if task == "single" or task == "both":
+            for key, feature in self.all_features.feature_dict.items():
+                if key != self.dep_feature:
+                    feature.reset_step_size()
+                    feat_dict =  self.all_features.get_single_reg_dict(key)
+                    self.linear_regression( feat_dict, key, "single")
+
+    def linear_regression(self,feat_dict, name, task):
+        
+        feat_matx = self.create_feature_matrix(feat_dict)
+
+        while self.check_step_size_above_min(feat_dict):
+            param_vec = self.create_prameter_vector(feat_dict, task)
+            i = 0
+            for key, feature in feat_dict.items():
+                param = self.calc_mean_squared_error(i, feature, param_vec, feat_matx)
+                self.append_parameter(self, task, feature, param, name)
+                i += 1
+
+    def calc_mean_squared_error(self, i, param_vec, feat_matx):
+
+        temp_A = feat_matx @ param_vec
+        temp_A = temp_A - self.all_features.get_dep_feature().get_series()
+        temp_A = np.transpose([temp_A]) @ [feat_matx[i]]
+
+        param = (1 / self.get_num_train_exaples()) * (np.sum(temp_A) * self.learning_rate)
+        return param
+
+    def append_parameter(self, task, feature, param, key):
+        feature.update_step_size(param)
+
+        if task == "multi":
+            feature.update_mul_parameter(param)
+        elif feature.name != self.dep_featur:
+            feature.update_sing_parameter(param)
+        elif feature.name != self.dep_featur:
+            feature.append_sing_param_dict(key)
+            
+    def get_num_train_exaples(self):
+        return self.all_features.get_df_lenght()
+
+class SingleVarRegression(Regression):
+    def __init__(self, feat, dependent_feature, learning_rate=0.01) -> None:
+        super().__init__(feat, dependent_feature, learning_rate)
     
-        x, y = symbols("x y")
-        sum_squared_residuals = 0
+class MultiVarRegression(Regression):
+    def __init__(self, feat, dependent_feature, learning_rate=0.01) -> None:
+        super().__init__(feat, dependent_feature, learning_rate)
 
-        for index in self.sampel_indexes:
 
-            point = self.get_point(feature,index)
-            symbol = feature.get_symbol()
 
-            derivative_eq = diff((point[1] - (y + x * point[0])) ** 2, symbol)
-            
-            
-            slope = feature.get_parameter() 
-            intercept = self.y_feature.get_parameter()
 
-            sum_squared_residuals += (derivative_eq.subs({y: intercept,x: slope})/ self.sample_size) * self.learning_rate 
-
-        feature.clac_new_step_size(sum_squared_residuals)
-        feature.clac_new_parameter(sum_squared_residuals)
-
-    def print_normalised_plot(self, name):
-
-        f, ax = plt.subplots(1)
-
-        ax.set_xlim(-0.5, 1.5)
-        ax.set_ylim(-0.5, 1.5)
-
-        slope = self.x_feature_dict[name].get_parameter()
-        intercept = self.y_feature.get_parameter()
-
-        print(f"Intercept: {round(intercept, 4)}")
-        print(f"slope: {round(slope, 4)}")
-
-        x = np.linspace(-1, 1)
-        y = slope * x + intercept
-        ax.plot(x, y, "r")
-
-        ax.scatter(
-            self.y_feature.get_normalised_series(),
-            self.x_feature_dict[name].get_normalised_series(),
-        )
-
-        plt.show()
 
