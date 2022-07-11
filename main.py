@@ -1,33 +1,36 @@
 #  CRIM   ZN  INDUS  CHAS NOX  RM   AGE  DIS   RAD  TAX   PTRATIO  B   LSTAT  MEDV
-from regression import Regression
+import regression
 import feature
 import interface
-import pandas as pd
-import os
+from data import Data
 
 def main():
-    dependent_feature = "MEDV"
 
-    df = read_csv()
-    test_df, train_df = splitt_dataframe(df)
-    feat_coll = feature.FeatureCollection(train_df, dependent_feature)
-    reg = Regression(feat_coll, dependent_feature)
-    reg.do_regression("single")
+    dep_feature = "MEDV"
+    data = Data("housing.csv" , dep_feature)
+    create_single_regression_objs(data, dep_feature)
 
 
-def splitt_dataframe(df):
-    lenght = int(df.shape[0] * 0.2)
-    
-    test_df = df[:lenght]
-    train_df = df[lenght:]
 
-    return (test_df, train_df)
+def create_single_regression_objs(data, dep_feature):
+    regrs_list = []
 
+    for column in data.normalised_df:
+        if column == dep_feature:
+            continue
+        else:
+            dep_feat = create_dep_feature_objs(data, dep_feature)
+            indep_feat = create_feature_objs(data, column)
+            sin_reg = regression.SingleVarRegression(column, [dep_feat,indep_feat], data)
+            regrs_list.append(sin_reg)
+        
+    return regrs_list
 
-def read_csv():
+def create_feature_objs(data, name):
+    return feature.Feature(name ,data.normalised_df[name])
 
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__),"data","housing.csv"), sep="\s+")
-    return df
+def create_dep_feature_objs(data, name):
+    return feature.DependentFeature(name ,data.normalised_df[name])
 
 
 if __name__ == "__main__":

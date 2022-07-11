@@ -7,26 +7,16 @@ class Feature():
         self.series = series.to_numpy()
         self.name = name
         self.step_size = 1
-        self.mul_parameter = 0
-        self.sing_parameter = 0
+        self.parameter = 0
 
-    def get_parameter(self, task):
-        if task == "multi":
-            return self.sing_parameter
-        elif task == "single":
-            return self.mul_parameter
+    def get_parameter(self):
+            return self.parameter
 
-    def set_parameter(self, parameter, task):
-        if task == "multi":
-            self.mul_parameter = parameter
-        elif task == "single":
-           self.sing_parameter = parameter
+    def set_parameter(self, parameter):
+            self.parameter = parameter
         
-    def update_parameter(self, sum_squared_residuals, task):
-        if task == "multi":
-           self.mul_parameter = self.mul_parameter - sum_squared_residuals
-        elif task == "single":
-           self.sing_parameter = self.sing_parameter - sum_squared_residuals
+    def update_parameter(self, sum_squared_residuals):
+           self.parameter = self.parameter - sum_squared_residuals
 
     def get_series(self):
         return self.series
@@ -48,24 +38,15 @@ class DependentFeature(Feature):
     def __init__(self,name, series) -> None:
         super().__init__(name, series)
         self.ones = np.ones((series.size))
-        self.sing_param_dict = {}
 
     def get_ones_vector(self):
         return self.ones
 
-    def append_sing_param_dict(self, name):
-        self.sing_param_dict[name] = 0
 
-    def get_intry_from_dict(self, name):
-        return self.sing_param_dict[name]
 
 
 class FeatureCollection:
     def __init__(self, df,  dependent_feature) -> None:
-        self.df = df
-        self.normalised_df = self.normalise_dataframe(df)
-        self.dependent_feature = dependent_feature
-        self.number_training_exaples = df.shape[0]
         self.feature_dict = self.create_feature_dict(dependent_feature)
         
     def create_feature_dict(self, name):
@@ -91,9 +72,6 @@ class FeatureCollection:
     def insert_row_of_ones(self):
         ones = np.ones((self.number_training_exaples, 1))
         self.normalised_df.insert(loc=0, column="one", value=ones)
-
-    def normalise_dataframe(self, df):
-        return (df - df.min()) / (df.max() - df.min())
 
     def normalise_series(self, series):
         return  (series - series.min()) / (series.max() - series.min())
