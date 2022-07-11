@@ -31,15 +31,21 @@ class Data:
 
     def get_columns(self):
         return self.df.columns
+
+    def get_norm_series(self, name):
+        return self.normalised_df[name]
+
+    def get_train_series(self, name):
+        return self.train_df[name]
         
     def normalise_dataframe(self, df):
         return (df - df.min()) / (df.max() - df.min())
 
     def splitt_dataframe(self):
-        lenght = int(self.df.shape[0] * 0.2)
+        lenght = int(self.normalised_df.shape[0] * 0.2)
         
-        test_df = self.df[:lenght]
-        train_df = self.df[lenght:]
+        test_df = self.normalised_df[:lenght]
+        train_df = self.normalised_df[lenght:]
 
         return (test_df, train_df)
 

@@ -41,9 +41,7 @@ class DependentFeature(Feature):
 
     def get_ones_vector(self):
         return self.ones
-
-
-
+        
 
 class FeatureCollection:
     def __init__(self, df,  dependent_feature) -> None:

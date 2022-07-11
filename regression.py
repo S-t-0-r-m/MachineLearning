@@ -54,8 +54,11 @@ class Regression:
     def calc_mean_squared_error(self, i, param_vec, num_rows ):
 
         temp_A = self.feat_matx @ param_vec
-        temp_A = temp_A - self.feat_list[0].get_series()
-        temp_A = np.transpose([temp_A]) @ [self.feat_matx[i]]
+        temp_b = np.transpose([self.feat_list[0].get_series()])
+        temp_A = temp_A - temp_b
+        temp_c = self.feat_matx[:,i]
+        temp_A = temp_c @ np.transpose([temp_A]) 
+        
 
         param = (1 / num_rows) * (np.sum(temp_A) * self.learn_rate)
         return param

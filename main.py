@@ -8,7 +8,8 @@ def main():
 
     dep_feature = "MEDV"
     data = Data("housing.csv" , dep_feature)
-    create_single_regression_objs(data, dep_feature)
+    reg = create_single_regression_objs(data, dep_feature)
+    interface.print_normalised_plot(data, reg)
 
 
 
@@ -27,10 +28,10 @@ def create_single_regression_objs(data, dep_feature):
     return regrs_list
 
 def create_feature_objs(data, name):
-    return feature.Feature(name ,data.normalised_df[name])
+    return feature.Feature(name ,data.get_train_series(name))
 
 def create_dep_feature_objs(data, name):
-    return feature.DependentFeature(name ,data.normalised_df[name])
+    return feature.DependentFeature(name ,data.get_train_series(name))
 
 
 if __name__ == "__main__":
