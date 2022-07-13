@@ -27,7 +27,7 @@ class Data:
     def get_num_rows_train(self):
         return self.train_df.shape[0]
 
-    def get_num_rows_train(self):
+    def get_num_rows_test(self):
         return self.test_df.shape[0]
 
     def get_columns(self):

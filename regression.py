@@ -1,77 +1,72 @@
-from feature import DependentFeature
-from data import Data
+import math
 import numpy as np
 import settings
 
 
 class Regression:
-    def __init__(self, feat_list, data) -> None:
+    def __init__(self, data) -> None:
         self.data = data
-        self.feat_list = feat_list
-        self.feat_matx = self.create_feature_matrix()
         self.learn_rate = settings.LEARN_RATE
         self.min_step_size = settings.MINIMUM_STEP_SIZE
 
     def check_step_size_above_min(self,):
-        step_size_above_min = False
-
-        for feature in self.feat_list:
-            if feature.get_step_size() > self.min_step_size:
-                step_size_above_min = True
-
-        return step_size_above_min
-
-    def create_prameter_vector(self):
-        parm_vec = np.array([])
-
-        for featur in self.feat_list:
-            parm_vec = [np.append(parm_vec, featur.get_parameter())]
-
-        return np.transpose(parm_vec)
-
-    def create_feature_matrix(self):
-        feat_matx = np.array([])
-
-        for featur in self.feat_list:
-            if isinstance(featur, DependentFeature):
-                feat_matx = featur.get_ones_vector()
-            else:
-                A = featur.get_series()
-                feat_matx = np.vstack([feat_matx, A])
-
-        return np.transpose(feat_matx)
+        A = np.where(self.step_size_list < self.min_step_size)[0]
+        return A.size < self.step_size_list.size
 
     def linear_regression(self):
         num_rows = self.data.get_num_rows_train()
 
         while self.check_step_size_above_min():
-            param_vec = self.create_prameter_vector()
+            param_vec = self.param_vector
 
-            for i, feature in enumerate(self.feat_list):
-                param = self.calc_mean_squared_error(i, param_vec, num_rows)
-                self.append_parameter(feature, param)
+            for i, feat_vec in enumerate(self.feat_matx):
+                param = self.calc_mean_squared_error(feat_vec ,param_vec, num_rows)
 
-    def calc_mean_squared_error(self, i, param_vec, num_rows):
+                self.update_step_size(i,param)
+                self.update_parameter(i,param)
 
-        temp_A = self.feat_matx @ param_vec
-        temp_A = temp_A - np.transpose([self.feat_list[0].get_series()])
-        temp_A = self.feat_matx[:, i] @ np.transpose([temp_A])
+    def clac_loss(self, param_vec):
+        A = ( param_vec @ self.feat_matx)
 
-        return (1 / num_rows) * (np.sum(temp_A) * self.learn_rate)
+        return A - self.y_vector
 
-    def append_parameter(self, feature, param):
-        feature.update_step_size(param)
-        feature.update_parameter(param)
+    def calc_mean_squared_error(self, feat_vec, param_vec, num_rows):
+        A = self.clac_loss(param_vec)
+        A = feat_vec @ A 
 
+        return (1 / num_rows) * (np.sum(A) * self.learn_rate)
+
+    def update_step_size(self, i,parameter):
+        self.step_size_list[i] = math.sqrt(parameter ** 2)
+
+    def update_parameter(self,i, parameter):
+        test = self.param_vector[i]- parameter
+        self.param_vector[i] = self.param_vector[i] - parameter
+    
 
 class SingleVarRegression(Regression):
-    def __init__(self, name, feat_list, data) -> None:
-        super().__init__(feat_list, data)
-        self.name = name
-
-
+    def __init__(self, name_list, data) -> None:
+        super().__init__(data)
+        self.name_list = name_list
+        self.y_vector =  None
+        self.feat_matx = self.create_feature_matrix()
+        self.step_size_list = np.array([1,1], dtype= np.float)
+        self.param_vector = np.array([0,0], dtype= np.float)
         
         super().linear_regression()
+
+    def create_feature_matrix(self):
+        feat_matx = np.ones((self.data.get_num_rows_train()))
+
+        for name in self.name_list:
+            A = self.data.get_train_series(name).to_numpy()
+
+            if name == self.data.get_dep_feat():
+                self.y_vector = A
+            else:
+                feat_matx = np.vstack([feat_matx, A])
+
+        return feat_matx
 
 
 class MultiVarRegression(Regression):

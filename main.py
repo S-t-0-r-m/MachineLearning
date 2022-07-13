@@ -20,22 +20,11 @@ def create_single_regression_objs(data, dep_feature):
         if column == dep_feature:
             continue
         else:
-            dep_feat = create_dep_feature_objs(data, dep_feature)
-            indep_feat = create_feature_objs(data, column)
-            sin_reg = regression.SingleVarRegression(
-                column, [dep_feat, indep_feat], data
-            )
+            name_list = [dep_feature,column]
+            sin_reg = regression.SingleVarRegression(name_list, data)
             regrs_list.append(sin_reg)
 
     return regrs_list
-
-
-def create_feature_objs(data, name):
-    return feature.Feature(name, data.get_train_series(name))
-
-
-def create_dep_feature_objs(data, name):
-    return feature.DependentFeature(name, data.get_train_series(name))
 
 
 if __name__ == "__main__":
