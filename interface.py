@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from tkinter import *
 
 
 def print_normalised_plot(data, reg):
@@ -8,8 +9,8 @@ def print_normalised_plot(data, reg):
 
         f, ax = plt.subplots(1)
 
-        ax.set_xlim(-0.5, 1.5)
-        ax.set_ylim(-0.5, 1.5)
+        ax.set_xlim(-0.1, 1.1)
+        ax.set_ylim(-0.1, 1.1)
 
         slope = reges.feat_list[1].get_parameter()
         intercept = reges.feat_list[0].get_parameter()
@@ -17,16 +18,12 @@ def print_normalised_plot(data, reg):
         plt.xlabel(reges.name)
         plt.ylabel("MEDV")
 
-        print(f"Intercept: {round(intercept, 4)}")
-        print(f"slope: {round(slope, 4)}")
-
         x = np.linspace(-1, 2)
         y = slope * x + intercept
 
         ax.scatter(
-              # y
             data.get_norm_series(reges.name),  # x
-            data.get_norm_series(data.dep_feature),
+            data.get_norm_series(data.dep_feature), # y
         )
         ax.plot(x, y, "r")
 

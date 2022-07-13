@@ -63,15 +63,14 @@ class Regression:
         feature.update_step_size(param)
         feature.update_parameter(param)
 
-    def get_num_train_exaples(self):
-        return self.all_features.get_df_lenght()
-
 
 class SingleVarRegression(Regression):
     def __init__(self, name, feat_list, data) -> None:
         super().__init__(feat_list, data)
-
         self.name = name
+
+
+        
         super().linear_regression()
 
 
