@@ -43,7 +43,7 @@ class Data:
         return (df - df.min()) / (df.max() - df.min())
 
     def splitt_dataframe(self):
-        lenght = int(self.normalised_df.shape[0] * 0.2)
+        lenght = int(self.normalised_df.shape[0] * 0.3)
 
         test_df = self.normalised_df[:lenght]
         train_df = self.normalised_df[lenght:]

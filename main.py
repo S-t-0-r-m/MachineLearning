@@ -1,16 +1,16 @@
 #  CRIM   ZN  INDUS  CHAS NOX  RM   AGE  DIS   RAD  TAX   PTRATIO  B   LSTAT  MEDV
 import regression
-import feature
-import interface
+from interface import Interface
 from data import Data
 
 
 def main():
 
+    int = Interface()
     dep_feature = "MEDV"
     data = Data("housing.csv", dep_feature)
     reg = create_single_regression_objs(data, dep_feature)
-    interface.print_normalised_plot(data, reg)
+    int.print_normalised_plot(data, reg)
 
 
 def create_single_regression_objs(data, dep_feature):
@@ -20,8 +20,8 @@ def create_single_regression_objs(data, dep_feature):
         if column == dep_feature:
             continue
         else:
-            name_list = [dep_feature,column]
-            sin_reg = regression.SingleVarRegression(name_list, data)
+            
+            sin_reg = regression.SingleVarRegression(column, data, "exponanial", 4)
             regrs_list.append(sin_reg)
 
     return regrs_list
