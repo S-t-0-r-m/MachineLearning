@@ -1,16 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import tkinter as tk
-
+from PyQt5.QtWidgets import QApplication, QWidget
 
 class Interface():
     def __init__(self) -> None:
+
+        main_hight=800
+        main_width=1300
+
         root = tk.Tk(className=" Maschine Learning")
         root.configure(background='#323739')
-        root.geometry("1980x1080")
-        root.mainloop()
+        root.geometry(f"{main_width}x{main_hight}")
 
+        sideframe = tk.Frame(root,bg="#4f5354",height=main_hight-50,width=200)
+        sideframe.place(x=0,y=50)
 
+        upperframe = tk.Frame(root,bg="#426b75",height=50,width=main_width)
+        upperframe.place(x=0,y=0)
+
+        #root.mainloop()
 
     def print_normalised_plot(self, data, reg):
 
