@@ -1,25 +1,21 @@
+
 import matplotlib.pyplot as plt
 import numpy as np
-import tkinter as tk
-from PyQt5.QtWidgets import QApplication, QWidget
+import sys
+from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QPushButton
 
-class Interface():
-    def __init__(self) -> None:
 
-        main_hight=800
-        main_width=1300
+class Interface(QWidget):
+    def __init__(self, parent) -> None:
+        super().__init__()
+        self.parent = parent
+        self.bottun = QPushButton("push")
+        self.label = QLabel("Hello World!!!!")
+        self.setGeometry(500,300,400,300)  
 
-        root = tk.Tk(className=" Maschine Learning")
-        root.configure(background='#323739')
-        root.geometry(f"{main_width}x{main_hight}")
 
-        sideframe = tk.Frame(root,bg="#4f5354",height=main_hight-50,width=200)
-        sideframe.place(x=0,y=50)
-
-        upperframe = tk.Frame(root,bg="#426b75",height=50,width=main_width)
-        upperframe.place(x=0,y=0)
-
-        #root.mainloop()
+        #self.setStyleSheet("background_color:red")
+       
 
     def print_normalised_plot(self, data, reg):
 
@@ -45,7 +41,8 @@ class Interface():
             ax[i,j].scatter(
                 data.get_norm_series(reges.name_list[1]),  # x
                 data.get_norm_series(reges.name_list[0]),  # y
-                2
+                2,
+                
             )
             ax[i,j].set_title(reges.name_list[1])
             ax[i,j].plot(x_list, y_list, "r")
@@ -61,6 +58,29 @@ class Interface():
         y_list=  reges.param_vector @ x_matrx 
 
         return(x_matrx[1] ,y_list)
+
+    def print_single_normalised_plot(self, data, regs):
+        upper_limit= 1.1
+        lower_limit = -0.1
+
+        figur, ax = plt.subplots()
+        ax.set_xlim(lower_limit, upper_limit)
+        ax.set_ylim(lower_limit, upper_limit)
+
+        for reg in regs:
+
+            x_list, y_list = self.calc_line(reg, upper_limit, lower_limit)
+            ax.scatter(
+                data.get_norm_series(reg.name_list[1]),  # x
+                data.get_norm_series(reg.name_list[0]),  # y
+                2,
+                
+            )
+            ax.set_title(reg.name_list[1])
+            ax.plot(x_list, y_list, "r")
+        plt.show()
+
+
 
 
 
@@ -81,3 +101,12 @@ class Interface():
             )
             plt.show()
 
+
+if __name__ == "__main__":
+    root =  QApplication(sys.argv)
+    window = Interface(root)
+    window.resize(800, 600)
+    window.setStyleSheet('red')
+    window.show()
+
+    sys.exit(root.exec())
