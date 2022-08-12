@@ -1,5 +1,5 @@
 import unittest 
-from data import Data
+from dataset import Data
 import regression
 
 class TestRegression(unittest.TestCase):

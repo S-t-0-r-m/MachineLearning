@@ -1,0 +1,2 @@
+pyuic5 dataset_dialog.ui -o dataset_dialog.py
+pyuic5 mainwindow.ui -o mainwindow.py

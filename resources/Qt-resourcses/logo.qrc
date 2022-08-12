@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="window-logo">
+    <file>ai-icon-9.png</file>
+  </qresource>
+</RCC>
