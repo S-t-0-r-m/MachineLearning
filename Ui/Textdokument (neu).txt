@@ -1,2 +1,3 @@
 pyuic5 dataset_dialog.ui -o dataset_dialog.py
 pyuic5 mainwindow.ui -o mainwindow.py
+pyuic5 contend_frame.ui -o contend_frame.py

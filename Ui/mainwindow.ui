@@ -13,16 +13,11 @@
   <property name="windowTitle">
    <string>  Maschine Learning</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>.</normaloff>
-    <normalon>:/window-logo/ai-icon-9.png</normalon>.</iconset>
-  </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {background-color: #151819;}</string>
   </property>
   <property name="windowFilePath">
-   <string>./pics</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="upperframe">
@@ -43,7 +38,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="lin_regression">
+    <widget class="QPushButton" name="regression">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -63,7 +58,7 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="log_regression">
+    <widget class="QPushButton" name="classification">
      <property name="geometry">
       <rect>
        <x>140</x>
@@ -104,69 +99,36 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
      </property>
     </widget>
    </widget>
-   <widget class="QScrollArea" name="FeaturListScrollArea">
+   <widget class="QLabel" name="NoData">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>92</y>
-      <width>171</width>
-      <height>641</height>
+      <x>170</x>
+      <y>30</y>
+      <width>931</width>
+      <height>691</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QScrollArea QWidget{   background-color:#282e30;}</string>
+     <string notr="true">QLabel{ color: rgba(255, 255, 255, 0.2); font: bold;  font-size: 50px;}</string>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
+    <property name="text">
+     <string>No Data</string>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
-    <property name="lineWidth">
-     <number>1</number>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>171</width>
-       <height>641</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <property name="spacing">
-       <number>0</number>
-      </property>
-     </layout>
-    </widget>
    </widget>
-   <widget class="QFrame" name="DepFeaturFrame">
+   <widget class="QFrame" name="sideframePlaceHolder">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>31</y>
-      <width>171</width>
-      <height>61</height>
+      <width>170</width>
+      <height>700</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QFrame{background-color:#282e30; border: solid #C1C1C1; border-width: 0px 0px 1px 0px;}</string>
+     <string notr="true">QFrame{   background-color:#0e1517;}</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -174,54 +136,21 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="DepFeaturLabel">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel {font: bold; color: #C1C1C1; text-align: center;  border-width: 0px 0px 0px 0px}</string>
-     </property>
-     <property name="text">
-      <string>Dependent Featur:</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="DepFeatComBox">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>101</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>false</bool>
-     </property>
-     <property name="currentText">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="SetDepFeat">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>30</y>
-       <width>41</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Set</string>
-     </property>
-    </widget>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="sideframeNoData">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color: rgba(255, 255, 255, 0.2); font: bold;  font-size: 20px;}</string>
+       </property>
+       <property name="text">
+        <string>No Data</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -242,6 +171,7 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
     </property>
     <addaction name="actionOpen_new_Project"/>
     <addaction name="actionOpen_Project"/>
+    <addaction name="actionSave_Project"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
     <property name="title">
@@ -259,7 +189,11 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="styleSheet">
+    <string notr="true">QStatusBar{ background-color: rgb(12, 12, 56)}</string>
+   </property>
+  </widget>
   <action name="actionOpen_new_Project">
    <property name="text">
     <string>New Project</string>
@@ -280,9 +214,12 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
     <string>There is no Help</string>
    </property>
   </action>
+  <action name="actionSave_Project">
+   <property name="text">
+    <string>Save Project</string>
+   </property>
+  </action>
  </widget>
- <resources>
-  <include location="../resources/Qt-resourcses/logo.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

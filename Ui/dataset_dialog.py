@@ -17,28 +17,40 @@ class Ui_Dialog(object):
         Dialog.resize(700, 550)
         Dialog.setMinimumSize(QtCore.QSize(700, 550))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/windowicon/ai-icon-9.qrc"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(
+            QtGui.QPixmap(":/windowicon/ai-icon-9.qrc"),
+            QtGui.QIcon.Normal,
+            QtGui.QIcon.Off,
+        )
         Dialog.setWindowIcon(icon)
         Dialog.setAutoFillBackground(False)
         Dialog.setStyleSheet("QDialog{background-color: #202124}")
         self.headingL = QtWidgets.QLabel(Dialog)
         self.headingL.setGeometry(QtCore.QRect(220, 0, 261, 41))
         self.headingL.setAutoFillBackground(False)
-        self.headingL.setStyleSheet("QLabel{ background-color: #202124; color: #C1C1C1; font: bold; text-decoration: underline; font-size: 15px;}")
+        self.headingL.setStyleSheet(
+            "QLabel{ background-color: #202124; color: #C1C1C1; font: bold; text-decoration: underline; font-size: 15px;}"
+        )
         self.headingL.setAlignment(QtCore.Qt.AlignCenter)
         self.headingL.setObjectName("headingL")
         self.path_lineEdit = QtWidgets.QLineEdit(Dialog)
         self.path_lineEdit.setGeometry(QtCore.QRect(20, 70, 391, 19))
-        self.path_lineEdit.setStyleSheet("QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px}")
+        self.path_lineEdit.setStyleSheet(
+            "QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px}"
+        )
         self.path_lineEdit.setText("")
         self.path_lineEdit.setObjectName("path_lineEdit")
         self.btnBrowse = QtWidgets.QPushButton(Dialog)
         self.btnBrowse.setGeometry(QtCore.QRect(430, 70, 81, 20))
-        self.btnBrowse.setStyleSheet("QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }")
+        self.btnBrowse.setStyleSheet(
+            "QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }"
+        )
         self.btnBrowse.setObjectName("btnBrowse")
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(20, 100, 61, 16))
-        self.label.setStyleSheet("QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}")
+        self.label.setStyleSheet(
+            "QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}"
+        )
         self.label.setObjectName("label")
         self.line_2 = QtWidgets.QFrame(Dialog)
         self.line_2.setGeometry(QtCore.QRect(20, 140, 671, 20))
@@ -47,11 +59,15 @@ class Ui_Dialog(object):
         self.line_2.setObjectName("line_2")
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(20, 50, 51, 20))
-        self.label_2.setStyleSheet("QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}")
+        self.label_2.setStyleSheet(
+            "QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}"
+        )
         self.label_2.setObjectName("label_2")
         self.comBoxSep = QtWidgets.QComboBox(Dialog)
         self.comBoxSep.setGeometry(QtCore.QRect(20, 120, 54, 19))
-        self.comBoxSep.setStyleSheet("QComboBox{background-color: #2F2F2F; color: #edebeb;}")
+        self.comBoxSep.setStyleSheet(
+            "QComboBox{background-color: #2F2F2F; color: #edebeb;}"
+        )
         self.comBoxSep.setObjectName("comBoxSep")
         self.comBoxSep.addItem("")
         self.comBoxSep.addItem("")
@@ -61,26 +77,40 @@ class Ui_Dialog(object):
         self.comBoxSep.addItem("")
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(530, 520, 156, 23))
-        self.buttonBox.setStyleSheet("QDialogButtonBox {background-color: #2F2F2F; color: #edebeb;}")
-        self.buttonBox.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+        self.buttonBox.setStyleSheet(
+            "QDialogButtonBox {background-color: #2F2F2F; color: #edebeb;}"
+        )
+        self.buttonBox.setLocale(
+            QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
+        )
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Save)
+        self.buttonBox.setStandardButtons(
+            QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Save
+        )
         self.buttonBox.setObjectName("buttonBox")
         self.submitbtn = QtWidgets.QPushButton(Dialog)
         self.submitbtn.setGeometry(QtCore.QRect(610, 120, 81, 20))
-        self.submitbtn.setStyleSheet("QPushButton {background-color: #2F2F2F; color: #edebeb;}")
+        self.submitbtn.setStyleSheet(
+            "QPushButton {background-color: #2F2F2F; color: #edebeb;}"
+        )
         self.submitbtn.setObjectName("submitbtn")
         self.label_4 = QtWidgets.QLabel(Dialog)
         self.label_4.setGeometry(QtCore.QRect(20, 150, 81, 16))
-        self.label_4.setStyleSheet("QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}")
+        self.label_4.setStyleSheet(
+            "QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}"
+        )
         self.label_4.setObjectName("label_4")
         self.name_lineEdit = QtWidgets.QLineEdit(Dialog)
         self.name_lineEdit.setGeometry(QtCore.QRect(20, 170, 113, 20))
-        self.name_lineEdit.setStyleSheet("QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px;}")
+        self.name_lineEdit.setStyleSheet(
+            "QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px;}"
+        )
         self.name_lineEdit.setObjectName("name_lineEdit")
         self.tableView = QtWidgets.QTableView(Dialog)
         self.tableView.setGeometry(QtCore.QRect(20, 200, 671, 291))
-        self.tableView.setStyleSheet("QTableView {background-color: #2F2F2F; color: #edebeb;}")
+        self.tableView.setStyleSheet(
+            "QTableView {background-color: #2F2F2F; color: #edebeb;}"
+        )
         self.tableView.setObjectName("tableView")
 
         self.retranslateUi(Dialog)
@@ -103,4 +133,3 @@ class Ui_Dialog(object):
         self.comBoxSep.setItemText(5, _translate("Dialog", "-"))
         self.submitbtn.setText(_translate("Dialog", "Submit"))
         self.label_4.setText(_translate("Dialog", "Project Name:"))
-

@@ -1,4 +1,3 @@
-import math
 import numpy as np
 import settings
 
@@ -13,17 +12,21 @@ class Regression:
 
     def check_step_size_above_min(self):
         return self.number_step_size_above_min() < self.step_size_list.size
-    
+
     def number_step_size_above_min(self):
         return np.where(self.step_size_list < self.min_step_size)[0].size
 
     def learning_rate_decay(self, epoch):
-        self.learn_rate = (1/ (1+1*epoch)) * self.learn_rate
+        #self.learn_rate = (1 / (1 + 1 * epoch)) * self.learn_rate
+        self.learn_rate = self.learn_rate - (self.learn_rate *  0.0001) 
+
 
     def get_stochastic_sample(self):
-        index_list= np.random.randint(self.dataset.get_num_of_train_examples(), size= settings.SAMPLE_SIZE)
+        index_list = np.random.randint(
+            self.dataset.get_num_of_train_examples(), size=settings.SAMPLE_SIZE
+        )
         return (self.feat_matx[:, index_list], self.y_vector[index_list])
-    
+
     def get_num_of_epochs(self):
         return self.num_of_epochs
 
@@ -35,34 +38,38 @@ class Regression:
         epoch = 0
         while self.check_step_size_above_min() and epoch < settings.MAX_INTERATIONS:
             temp_hypothesis = self.hypothesis
-            
-            for i, feat_vec in enumerate(self.feat_matx):
-                param = self.calc_mean_squared_error(feat_vec,temp_hypothesis, num_rows)
 
-                self.update_step_size(i, param)
-                self.update_parameter(i, param)
-            
+            param = self.calc_mean_squared_error(
+                 temp_hypothesis, num_rows
+                )
+
+            self.update_step_size( param)
+            self.update_parameter( param)
+
             epoch += 1
+            if epoch > 10000:
+                self.learning_rate_decay(epoch)
         self.update_num_of_epochs(epoch)
 
     def clac_loss(self, hypothesis):
-        return  (hypothesis @ self.feat_matx) - self.y_vector 
+        return ((hypothesis @ self.feat_matx) - self.y_vector).to_numpy()
 
-    def calc_mean_squared_error(self, feat_vec, hypothesis, num_rows):
-        A = feat_vec @ self.clac_loss(hypothesis)
-        return self.learn_rate * (1 / num_rows) * np.sum(A)
+    def calc_mean_squared_error(self, hypothesis, num_rows):
+        B = self.clac_loss(hypothesis)
+        A =  B * self.feat_matx
+        return np.sum(self.learn_rate * (1 / num_rows) * A, axis=1)
 
-    def update_step_size(self, i, parameter):
-        self.step_size_list[i] = math.sqrt(parameter ** 2)
+    def update_step_size(self, parameter):
+        self.step_size_list = np.sqrt(parameter**2)
 
     def get_r_squard(self):
-        sst = np.sum((self.y_vector - np.mean(self.y_vector))**2)
-        ssr = np.sum(self.clac_loss(self.hypothesis)**2)
-        return  round(100*(1 - (ssr/sst)),3)
+        sst = np.sum((self.y_vector - np.mean(self.y_vector)) ** 2)
+        ssr = np.sum(self.clac_loss(self.hypothesis) ** 2)
+        return round(100 * (1 - (ssr / sst)), 3)
 
+    def update_parameter(self, parameter):
+        self.hypothesis = self.hypothesis - parameter
 
-    def update_parameter(self, i, parameter):
-        self.hypothesis[i] = self.hypothesis[i] - parameter
 
 class SingleVarRegression(Regression):
     def __init__(self, feature_name, dataset, function_type, exponent) -> None:
@@ -75,7 +82,7 @@ class SingleVarRegression(Regression):
         self.step_size_list = self.create_step_size_list()
         self.hypothesis = self.create_hypothesis()
 
-        self.linear_regression()
+        #self.linear_regression()
 
     def get_hypothesis(self):
         return self.hypothesis
@@ -91,7 +98,7 @@ class SingleVarRegression(Regression):
         return name_list
 
     def create_y_vector(self):
-        return self.dataset.get_train_series(self.feat_name_list[0],"norm")
+        return self.dataset.get_train_series(self.feat_name_list[0], "norm")
 
     def create_feature_matrixes(self, df_type, size):
         feat_matx = np.ones(self.dataset.get_num_of_examples(size))
@@ -101,15 +108,15 @@ class SingleVarRegression(Regression):
                 continue
 
             feature_vector = self.dataset.get_series(name, df_type, size).to_numpy()
-            feature_vector = self.modify_vector(feature_vector, exponent,name)
+            feature_vector = self.modify_vector(feature_vector, exponent, name)
             feat_matx = np.vstack([feat_matx, feature_vector])
 
         return feat_matx
 
     def modify_vector(self, feature_vector, exponent, name):
         if self.function_type == "polynomial":
-            return  feature_vector ** exponent
-            #return self.data.get_exposed_series(name, exponent ).to_numpy()
+            return feature_vector**exponent
+            # return self.data.get_exposed_series(name, exponent ).to_numpy()
 
     def create_step_size_list(self):
         return np.ones(len(self.feat_name_list))
@@ -121,4 +128,3 @@ class SingleVarRegression(Regression):
 class MultiVarRegression(Regression):
     def __init__(self, feat_list, data) -> None:
         super().__init__(feat_list, data)
-
