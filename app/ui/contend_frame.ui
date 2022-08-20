@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TabWidget</class>
+ <widget class="QTabWidget" name="TabWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>950</width>
+    <height>742</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TabWidget</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QTabWidget{background-color: #202124; border:none;}</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <property name="currentIndex">
+   <number>0</number>
+  </property>
+  <widget class="QWidget" name="summeryTab">
+   <property name="styleSheet">
+    <string notr="true">QWidget{background-color: #151819; }</string>
+   </property>
+   <attribute name="title">
+    <string>Summary</string>
+   </attribute>
+   <widget class="QLabel" name="HeadingL">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>0</y>
+      <width>350</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{ color:#C1C1C1; font: bold;  font-size: 30px; border:solid #C1C1C1; border-width: 0px px 5px 0px}</string>
+    </property>
+    <property name="text">
+     <string>PlaceHolder</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QFrame" name="StatsFrame">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>80</y>
+      <width>251</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{ border: solid #C1C1C1; border-width: 0px 0px 0px 1px;}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="9" column="0" colspan="2">
+      <widget class="QListWidget" name="listWidget">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget{ background-color: #2F2F2F;color:#C1C1C1;border: solid grey; border-width: 1px;}</string>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustToContents</enum>
+       </property>
+       <item>
+        <property name="text">
+         <string>Polynomial</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Logarithmic</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Exponential</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLineEdit" name="LearnLLineEdit">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QPushButton" name="LearnLSBtn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
+       </property>
+       <property name="text">
+        <string>Set</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="EpochLNum">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 5px;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>NaN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="0">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="10" column="1">
+      <widget class="QPushButton" name="PotenzSubBtn">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
+       </property>
+       <property name="text">
+        <string>Set</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="MaxEpochLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;margin-top: 5px;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>Max Epochs:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="1">
+      <widget class="QPushButton" name="MaxEpochBtn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
+       </property>
+       <property name="text">
+        <string>Set</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="RSquaredLNum">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 5px;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>NaN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QLabel" name="RSquaredL">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>R Squared:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLineEdit" name="MaxEpochLEdit">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px}</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="TimeLNum">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 10px;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>NaN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QSpinBox" name="PotenzSpinBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="wrapping">
+        <bool>true</bool>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="EpochL">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1; border: None;}</string>
+       </property>
+       <property name="text">
+        <string>Epochs:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="TimeL">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>Time:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0" colspan="2">
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;border: None;	border:  solid #C1C1C1; border-width: 2px 0px 0px 0px;padding-top:5px;}</string>
+       </property>
+       <property name="text">
+        <string>Function Settings:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0" colspan="2">
+      <widget class="QLabel" name="LearnL">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;margin-top: 5px;border: None; border:  solid #C1C1C1; border-width: 2px 0px 0px 0px; padding-top:5px;}</string>
+       </property>
+       <property name="text">
+        <string>Learning Rate:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="chartSettingFrame">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>651</width>
+      <height>38</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{ border: solid #C1C1C1; border-width: 0px 0px 1px 0px;}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
+       </property>
+       <property name="text">
+        <string>Chart: Standart</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="TestBtn">
+       <property name="styleSheet">
+        <string notr="true">QRadioButton{ color:#C1C1C1;border: solid #C1C1C1; border-width: 0px 0px 0px 2px; padding-left: 5px}</string>
+       </property>
+       <property name="text">
+        <string>Testing Set</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="TrainBtn">
+       <property name="styleSheet">
+        <string notr="true">QRadioButton{ color:#C1C1C1; padding-right: 5px;border: solid #C1C1C1; border-width: 0px 2px 0px 0px;}</string>
+       </property>
+       <property name="text">
+        <string>Training Set</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="DynamcChartcheck">
+       <property name="styleSheet">
+        <string notr="true">QCheckBox{ color:#C1C1C1;}</string>
+       </property>
+       <property name="text">
+        <string>Dynamic Chart</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="ChatFrame">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>651</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>50</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="tab_2">
+   <property name="styleSheet">
+    <string notr="true">QWidget{background-color: #151819; }</string>
+   </property>
+   <attribute name="title">
+    <string>Step Sizes</string>
+   </attribute>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>0</y>
+      <width>350</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{ color:grey; font: bold;  font-size: 30px; border:solid grey; border-width: 0px px 5px 0px}</string>
+    </property>
+    <property name="text">
+     <string>PlaceHolder</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>19</x>
+      <y>79</y>
+      <width>911</width>
+      <height>631</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>909</width>
+       <height>629</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

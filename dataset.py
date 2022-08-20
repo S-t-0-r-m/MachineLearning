@@ -16,7 +16,7 @@ class Dataset:
         self.splitt_index = int(self.df.shape[0] * 0.3)
 
     def get_dependet_feature(self):
-        return self.dep_feature
+         return self.dep_feature
 
     def set_dependet_feature(self, depend_ferature):
         self.dep_feature = depend_ferature
@@ -150,7 +150,4 @@ class Dataset:
                 self.seperator = row[1]
                 self.splitt_index = int(row[2])
 
-#     def get_potentiated_series(self, name, exponent ): # wrong
-#         test_df, train_df = self.splitt_dataframe(self.df)
-#         serien = train_df[name]
-#         return  self.normalise_series(serien**exponent)
+   

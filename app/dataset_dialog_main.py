@@ -1,4 +1,4 @@
-from Ui.dataset_dialog import Ui_Dialog
+from app.ui.dataset_dialog import Ui_Dialog
 from dataset import Dataset
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys

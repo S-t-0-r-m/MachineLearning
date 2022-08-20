@@ -4,10 +4,10 @@ import regression
 import concurrent.futures
 from dataset import Dataset
 import matplotlib.pyplot as plt
-plt.style.use("bmh")
+plt.style.use("ggplot")
 import numpy as np
 
-from Ui.mainwindow_main import MainWindowMain
+from app.mainwindow_main import MainWindowMain
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -24,6 +24,8 @@ def main():
     data.set_up("datasets/housing.csv", dep_feature, "\s+", False)
     reg = create_single_regression_objs(data, dep_feature)
     print_single_normalised_plot(data, reg)
+    for regs in reg:
+        print_plot(regs)
 
 
 def runapp():
@@ -66,7 +68,7 @@ def print_single_normalised_plot(data, regs):
 
     for reg in regs:
 
-        figur, ax = plt.subplots(2, 1, figsize=(6, 7))
+        figur, ax = plt.subplots(2, 1, figsize=(4, 5))
 
         ax[0].set_xlim(lower_limit, upper_limit)
         ax[0].set_ylim(lower_limit, upper_limit)
@@ -76,6 +78,7 @@ def print_single_normalised_plot(data, regs):
 
         print(f"epochs: {reg.num_of_epochs}")
         print(f"R^2: {reg.get_r_squard()} %")
+        print(reg.step_size_list.shape[1])
 
         list = clac_loss(
             reg.hypothesis, reg.create_feature_matrixes(df_type, size), y.to_numpy()
@@ -92,7 +95,7 @@ def print_single_normalised_plot(data, regs):
             linewidths=1,
             alpha=0.8,
         )
-        ax[0].set_title(reg.feat_name_list[1])
+        ax[0].set_title(reg.get_featur_name())
         ax[0].plot(x_list, y_list, "r")
 
         plt.colorbar(im, ax=ax[0])
@@ -100,6 +103,20 @@ def print_single_normalised_plot(data, regs):
         ax[1].hist(list, bins=50, edgecolor="black")
 
     plt.show()
+
+def print_plot(reg_obj):
+    x = create_x(reg_obj.step_size_list)
+    fig, ax = plt.subplots(reg_obj.step_size_list.shape[1], 1,figsize=(6.51,8), facecolor='#151819')
+
+    for i in range(reg_obj.step_size_list.shape[1]):
+        ax[i].plot(x, reg_obj.step_size_list[1:,i], "r")
+    plt.show()
+
+    
+
+    
+def create_x( step_size_list):
+    return  np.arange(10, step_size_list.shape[0]*10, 10)
 
 
 def clac_loss(param_vector, feat_matx, y_vector):
