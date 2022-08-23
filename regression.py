@@ -6,8 +6,10 @@ class Regression:
     def __init__(self, dataset) -> None:
         self.dataset = dataset
         self.learn_rate = 0.1
-        self.min_step_size = settings.MINIMUM_STEP_SIZE
+        self.min_step_size = 0
         self.num_of_epochs = 0
+        self.max_epochs = settings.MAX_INTERATIONS
+        self.stop = False
 
     def check_step_size_above_min(self):
         return self.number_step_size_above_min() < self.step_size_list.size
@@ -29,12 +31,13 @@ class Regression:
         return self.num_of_epochs
 
     def update_num_of_epochs(self, epoch):
-        self.num_of_epochs = epoch
+        self.num_of_epochs += epoch
 
     def linear_regression(self):
         num_rows = self.dataset.get_num_of_train_examples()
         epoch = 0
-        while  epoch < settings.MAX_INTERATIONS:
+        self.stop = False
+        while  epoch < self.max_epochs and not self.stop:
             temp_hypothesis = self.hypothesis
 
             param = self.calc_mean_squared_error(temp_hypothesis, num_rows)
@@ -56,8 +59,6 @@ class Regression:
 
     def update_step_size(self, parameter):
         self.step_size_list = np.vstack([self.step_size_list, np.sqrt(parameter**2)])
-
-
 
     def get_r_squard(self):
         sst = np.sum((self.y_vector - np.mean(self.y_vector)) ** 2)

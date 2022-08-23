@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>950</width>
-    <height>742</height>
+    <width>1032</width>
+    <height>724</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    <widget class="QLabel" name="HeadingL">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>0</y>
       <width>350</width>
       <height>60</height>
@@ -54,7 +54,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>690</x>
+      <x>770</x>
       <y>80</y>
       <width>251</width>
       <height>611</height>
@@ -70,7 +70,79 @@
      <enum>QFrame::Raised</enum>
     </property>
     <layout class="QGridLayout" name="gridLayout">
+     <item row="4" column="0">
+      <widget class="QLabel" name="EpochLNum">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 5px;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>NaN</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QSpinBox" name="PotenzSpinBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="wrapping">
+        <bool>true</bool>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>20</number>
+       </property>
+      </widget>
+     </item>
      <item row="9" column="0" colspan="2">
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;border: None;	border:  solid #C1C1C1; border-width: 2px 0px 0px 0px;padding-top:5px;}</string>
+       </property>
+       <property name="text">
+        <string>Function Settings:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <widget class="QLabel" name="RSquaredL">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>R Squared:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="0">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="14" column="0">
+      <widget class="QLabel" name="MaxEpochLabel">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1;margin-top: 5px;border: None;}</string>
+       </property>
+       <property name="text">
+        <string>Max Epochs:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0" colspan="2">
       <widget class="QListWidget" name="listWidget">
        <property name="enabled">
         <bool>true</bool>
@@ -110,17 +182,7 @@
        </item>
       </widget>
      </item>
-     <item row="12" column="0">
-      <widget class="QLineEdit" name="LearnLLineEdit">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px}</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="1">
+     <item row="13" column="1">
       <widget class="QPushButton" name="LearnLSBtn">
        <property name="styleSheet">
         <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
@@ -130,8 +192,18 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="EpochLNum">
+     <item row="13" column="0">
+      <widget class="QLineEdit" name="LearnLLineEdit">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {background-color: #2F2F2F; color: #edebeb; border: solid red; width: 9px 1px 1px 1px}</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="RSquaredLNum">
        <property name="styleSheet">
         <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 5px;border: None;}</string>
        </property>
@@ -140,20 +212,7 @@
        </property>
       </widget>
      </item>
-     <item row="15" column="0">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="10" column="1">
+     <item row="11" column="1">
       <widget class="QPushButton" name="PotenzSubBtn">
        <property name="enabled">
         <bool>false</bool>
@@ -166,17 +225,7 @@
        </property>
       </widget>
      </item>
-     <item row="13" column="0">
-      <widget class="QLabel" name="MaxEpochLabel">
-       <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1;margin-top: 5px;border: None;}</string>
-       </property>
-       <property name="text">
-        <string>Max Epochs:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="1">
+     <item row="15" column="1">
       <widget class="QPushButton" name="MaxEpochBtn">
        <property name="styleSheet">
         <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
@@ -186,27 +235,27 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="RSquaredLNum">
+     <item row="12" column="0" colspan="2">
+      <widget class="QLabel" name="LearnL">
        <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 5px;border: None;}</string>
+        <string notr="true">QLabel{ color:#C1C1C1;margin-top: 5px;border: None; border:  solid #C1C1C1; border-width: 2px 0px 0px 0px; padding-top:5px;}</string>
+       </property>
+       <property name="text">
+        <string>Learning Rate:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="TimeLNum">
+       <property name="styleSheet">
+        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 10px;border: None;}</string>
        </property>
        <property name="text">
         <string>NaN</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0" colspan="2">
-      <widget class="QLabel" name="RSquaredL">
-       <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1;border: None;}</string>
-       </property>
-       <property name="text">
-        <string>R Squared:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="14" column="0">
+     <item row="15" column="0">
       <widget class="QLineEdit" name="MaxEpochLEdit">
        <property name="enabled">
         <bool>true</bool>
@@ -220,45 +269,6 @@
       </widget>
      </item>
      <item row="7" column="0">
-      <widget class="QLabel" name="TimeLNum">
-       <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1; margin-bottom: 10px;border: None;}</string>
-       </property>
-       <property name="text">
-        <string>NaN</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QSpinBox" name="PotenzSpinBox">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="wrapping">
-        <bool>true</bool>
-       </property>
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>20</number>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="EpochL">
-       <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1; border: None;}</string>
-       </property>
-       <property name="text">
-        <string>Epochs:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
       <widget class="QLabel" name="TimeL">
        <property name="styleSheet">
         <string notr="true">QLabel{ color:#C1C1C1;border: None;}</string>
@@ -268,23 +278,13 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="0" colspan="2">
-      <widget class="QLabel" name="label">
+     <item row="3" column="0">
+      <widget class="QLabel" name="EpochL">
        <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1;border: None;	border:  solid #C1C1C1; border-width: 2px 0px 0px 0px;padding-top:5px;}</string>
+        <string notr="true">QLabel{ color:#C1C1C1; border: None;}</string>
        </property>
        <property name="text">
-        <string>Function Settings:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0" colspan="2">
-      <widget class="QLabel" name="LearnL">
-       <property name="styleSheet">
-        <string notr="true">QLabel{ color:#C1C1C1;margin-top: 5px;border: None; border:  solid #C1C1C1; border-width: 2px 0px 0px 0px; padding-top:5px;}</string>
-       </property>
-       <property name="text">
-        <string>Learning Rate:</string>
+        <string>Epochs:</string>
        </property>
       </widget>
      </item>
@@ -295,7 +295,7 @@
      <rect>
       <x>20</x>
       <y>70</y>
-      <width>651</width>
+      <width>751</width>
       <height>38</height>
      </rect>
     </property>
@@ -323,7 +323,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="chartTypeBtn">
        <property name="styleSheet">
         <string notr="true">QPushButton {background-color: #2F2F2F; color: #edebeb; text-align: center; }</string>
        </property>
@@ -385,7 +385,7 @@
      <rect>
       <x>20</x>
       <y>110</y>
-      <width>651</width>
+      <width>731</width>
       <height>581</height>
      </rect>
     </property>
@@ -396,10 +396,10 @@
      <enum>QFrame::Raised</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="resetBtn">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>880</x>
       <y>50</y>
       <width>75</width>
       <height>23</height>
@@ -423,7 +423,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>0</y>
       <width>350</width>
       <height>60</height>

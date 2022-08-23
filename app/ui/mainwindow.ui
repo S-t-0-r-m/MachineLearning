@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1110</width>
-    <height>770</height>
+    <width>1200</width>
+    <height>860</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1200</width>
+    <height>860</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>  Maschine Learning</string>
@@ -25,7 +37,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1171</width>
+      <width>1200</width>
       <height>31</height>
      </rect>
     </property>
@@ -124,7 +136,7 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
       <x>0</x>
       <y>31</y>
       <width>170</width>
-      <height>700</height>
+      <height>830</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -158,7 +170,7 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1110</width>
+     <width>1200</width>
      <height>22</height>
     </rect>
    </property>
