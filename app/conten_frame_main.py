@@ -33,16 +33,18 @@ class  ContenFrame(QtWidgets.QTabWidget):
         self.ui.TrainBtn.clicked.connect(self.change_to_train_chart)
 
     def change_to_test_chart(self):
-        self.cav.clear_plot()
-        self.df_type = "test"
+        #self.cav.clear_plot()
+        self.df_size = "test"
+        self.update_plot()
+        self.cav.print_single_normalised_plot()
 
 
     def change_to_train_chart(self):
-        self.cav.clear_plot()
-        self.df_type = "train"
+        #self.cav.clear_plot()
+        self.df_size = "train"
 
-        self.cav.update()
-        self.cav.show()
+        self.update_plot()
+        self.cav.print_single_normalised_plot()
 
 
     def set_learen_rate(self):
@@ -112,6 +114,9 @@ class Canvas(FigureCanvas):
 
         self.ax[0].set_xlim(lower_limit, upper_limit)
         self.ax[0].set_ylim(lower_limit, upper_limit)
+
+        print(self.df_type)
+        print(self.df_size) 
 
         x = self.reg_obj.dataset.get_series(self.reg_obj.get_featur_name(), self.df_type, self.df_size)
         y = self.reg_obj.dataset.get_series(self.reg_obj.dataset.get_dependet_feature(),self.df_type, self.df_size)
