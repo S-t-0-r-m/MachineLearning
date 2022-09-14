@@ -1,160 +1,29 @@
-from app.ui.mainwindow import Ui_MainWindow
-from app.dataset_dialog_main import DatasetDialog
-from app.conten_frame_main import ContenFrame
 import time
+from app.conten_frame import ContenFrame
 from functools import partial
-
-from dataset import Dataset
-import regression
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sys
+import os
 
+PATH = os.path.dirname(__file__)
 
-class MainWindowMain(QtWidgets.QMainWindow):
-    def __init__(self, parent=None) -> None:
-        super().__init__(parent)
+class RegSidebar:
+    def __init__(self, parent) -> None:
+        self.parent = parent
+        
+        pass
 
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./resources/ai-icon-9.png"))
-        self.height = 860
-        self.width = 1200
+class ClassSidebar:
+    def __init__(self, parent) -> None:
+        self.parent = parent
+        
+        pass
 
-        self.upperframe_list = [
-            self.ui.regression,
-            self.ui.classification,
-            self.ui.deep_learn,
-        ]
-
-        self.project_name = ""
-        self.dataset = None
-        self.current_mode = None
-        self.regression_list = []
-
-        self.current_side_bar = [
-            DepFeatSelctFrame(self.regression_list, self.dataset, self),
-            DepFeatSelctFrame(self.regression_list, self.dataset, self),
-            DepFeatSelctFrame(self.regression_list, self.dataset, self),
-        ]
-
-        self.ui.regression.clicked.connect(self.select_regression_mode)
-        self.ui.classification.clicked.connect(self.select_classification_mode)
-        self.ui.deep_learn.clicked.connect(self.select_deep_learn_mode)
-
-        self.ui.actionOpen_new_Project.triggered.connect(self.open_new_project)
-        self.ui.actionOpen_Project.triggered.connect(self.open_project)
-
-        self.select_regression_mode()
-
-    def open_new_project(self):
-        window = DatasetDialog(self)
-        window.show()
-
-    def open_project(self):
-        folderpath = str(
-            QtWidgets.QFileDialog.getExistingDirectory(
-                self,
-                "Open Directory",
-                "C:\\Users\\sbues\\VSCode\\python\\Regression\\projects",
-            )
-        )
-
-        status = False
-        if folderpath != "":
-            self.project_name = folderpath.split("/")[-1]
-            status = self.load_dataset(folderpath, self.project_name)
-
-        if status:
-            self.create_single_regression_objs()
-            self.current_side_bar[self.current_mode].populate_DepFeatComBox(
-                self.dataset
-            )
-            self.current_side_bar[self.current_mode].update_scrollarea(
-                self.regression_list
-            )
-
-    def load_dataset(self, path, project_name):
-        try:
-            self.dataset = Dataset()
-            self.dataset.load_dataset(path, project_name)
-        except Exception as e:
-            print(e)
-            print("error: mainwindow -> open_project() ")
-            return False
-        return True
-
-    def update_SideNavBar(self):
-        if type(self.current_side_bar) is SideNavBar:
-            self.current_side_bar.update_bar(self.regression_list)
-
-    def check_is_sidebar_exist(self):
-        if type(self.current_side_bar) is SideNavBar:
-            return True
-        return False
-
-    def select_regression_mode(self):
-        self.reset_upperframe_button_style()
-        self.select_upperframe_button_style(self.ui.regression)
-
-        self.current_side_bar[1].hide()
-        self.current_side_bar[2].hide()
-        self.current_side_bar[0].show()
-
-        self.current_mode = 0
-
-    def select_classification_mode(self):
-        self.reset_upperframe_button_style()
-        self.select_upperframe_button_style(self.ui.classification)
-        self.current_side_bar[0].hide()
-        self.current_side_bar[2].hide()
-        self.current_side_bar[1].show()
-        self.current_mode = 1
-
-    def select_deep_learn_mode(self):
-        self.reset_upperframe_button_style()
-        self.select_upperframe_button_style(self.ui.deep_learn)
-        self.current_side_bar[0].hide()
-        self.current_side_bar[1].hide()
-        self.current_side_bar[2].show()
-
-        self.current_mode = 2
-
-    def select_upperframe_button_style(self, bottun):
-        bottun.setStyleSheet(
-            "QPushButton {font: bold; color: #ffffff; text-align: center; border: solid #ffffff; border-width: 0px 0px 1px 0px} QPushButton:hover {background-color: rgba(255,255,255,0.1);}"
-        )
-
-    def reset_upperframe_button_style(self):
-        for bottun in self.upperframe_list:
-            bottun.setStyleSheet(
-                "QPushButton {font: bold; color: #C1C1C1; text-align: center;border: None} QPushButton:hover {background-color: rgba(255,255,255,0.1);}"
-            )
-
-    def create_single_regression_objs(self):
-        self.regression_list = [
-            regression.SingleVarRegression(column, self.dataset, "polynomial", 3)
-            for column in self.dataset.get_df()
-            if column != self.dataset.get_dependet_feature()
-        ]
-
-    def print_me(self):
-        print("Print Me!")
-
-    def resizeEvent(self, event) -> None:
-        self.height = event.size().height()
-        self.width = event.size().width()
-        self.ui.upperframe.resize(self.width, 31)
-
-        for bar in self.current_side_bar:
-            bar.resize(170, self.height - 74)
-            bar.nav_area.resize(171, self.height - 150)
-            #bar.nav_area.scrollAreaWidgetContents.resize(171, height - 150)
-
-            
-            print(f"width: {self.width}, height: {self.height}")
-            bar.nav_area.resize_contend(self.width, self.height)
-
+class DeepSidebar:
+    def __init__(self, parent) -> None:
+        self.parent = parent
+        
+        pass
+    
 
 class DepFeatSelctFrame(QtWidgets.QFrame):
     def __init__(self, regression_list, dataset, parent=None) -> None:
@@ -374,14 +243,14 @@ class SideNavBar(QtWidgets.QScrollArea):
             "QPushButton {color: #C1C1C1; text-align: left; border: None}"
             "QPushButton:hover{background-color: rgba(255,255,255,0.1);}"
         )
-        bottun.setIcon(QtGui.QIcon("./resources/angle-right.png"))
+        bottun.setIcon(QtGui.QIcon(f"{PATH}/resources/angle-right.png"))
 
     def selected_featur_btn_style(self, button):
         button.setStyleSheet(
             "QPushButton {background-color: rgba(255,255,255,0.1); font: bold; color: #ffffff; text-align: left; padding-left: 5px; border: solid #ffffff; border-width: 0px 0px 0px 3px} "
             "QPushButton:hover{background-color: rgba(255,255,255,0.1);}"
         )
-        button.setIcon(QtGui.QIcon("./resources/angle-right-ffffff.png"))
+        button.setIcon(QtGui.QIcon(f"{PATH}/resources/angle-right-ffffff.png"))
         self.gridLayout.addWidget(button, self.current_index, 0, 1, 1)
 
 
@@ -392,17 +261,3 @@ class WorkerThread(QtCore.QThread):
 
     def run(self):
         self.regression_obj.linear_regression()
-
-
-if __name__ == "__main__":
-    if hasattr(QtCore.Qt, "AA_EnableHighDpiScaling"):
-        QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
-    if hasattr(QtCore.Qt, "AA_UseHighDpiPixmaps"):
-        QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
-
-    root = QtWidgets.QApplication(sys.argv)
-    # root.setStyleSheet(open('./style.css').read())
-    window = MainWindowMain()
-    window.show()
-
-    sys.exit(root.exec())

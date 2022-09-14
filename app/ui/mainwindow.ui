@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>860</height>
+    <width>1202</width>
+    <height>864</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -37,7 +37,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1200</width>
+      <width>1211</width>
       <height>31</height>
      </rect>
     </property>
@@ -50,74 +50,30 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="regression">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>141</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {font: bold; color: #C1C1C1; text-align: center; border: None}
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="regression">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {font: bold; color: #C1C1C1; text-align: center; border: None}
 QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
-     </property>
-     <property name="text">
-      <string>Regression</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="classification">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>0</y>
-       <width>141</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {font: bold; color: #C1C1C1; text-align: center; border: None}
-QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
-     </property>
-     <property name="text">
-      <string>Classification</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="deep_learn">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>0</y>
-       <width>161</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {font: bold; color: #C1C1C1; text-align: center; border: None}
-QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
-     </property>
-     <property name="text">
-      <string>Deep Learning</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
+       </property>
+       <property name="text">
+        <string>No Project Selected</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QLabel" name="NoData">
     <property name="geometry">
      <rect>
       <x>170</x>
       <y>30</y>
-      <width>931</width>
-      <height>691</height>
+      <width>1031</width>
+      <height>791</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -134,9 +90,9 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>31</y>
+      <y>30</y>
       <width>170</width>
-      <height>830</height>
+      <height>831</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -170,7 +126,7 @@ QPushButton:hover{background-color: rgba(255,255,255,0.1);}</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1202</width>
      <height>22</height>
     </rect>
    </property>

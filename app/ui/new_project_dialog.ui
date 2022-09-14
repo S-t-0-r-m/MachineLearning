@@ -20,7 +20,7 @@
    <string>Dialog</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="ai-icon-9.qrc">
+   <iconset>
     <normaloff>:/windowicon/ai-icon-9.qrc</normaloff>:/windowicon/ai-icon-9.qrc</iconset>
   </property>
   <property name="autoFillBackground">
@@ -29,7 +29,7 @@
   <property name="styleSheet">
    <string notr="true">QDialog{background-color: #202124}</string>
   </property>
-  <widget class="QLabel" name="headingL">
+  <widget class="QLabel" name="headingLable">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -66,6 +66,9 @@
    <property name="text">
     <string/>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QPushButton" name="btnBrowse">
    <property name="geometry">
@@ -83,7 +86,7 @@
     <string>Browse</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="seperatorLable">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -99,7 +102,7 @@
     <string>Seperator:</string>
    </property>
   </widget>
-  <widget class="Line" name="line_2">
+  <widget class="Line" name="horizontalLine">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -112,7 +115,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="pathLabel">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -175,9 +178,9 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>520</y>
+     <y>502</y>
      <width>156</width>
-     <height>23</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -209,7 +212,7 @@
     <string>Submit</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="projectNameLable">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -250,6 +253,50 @@
    <property name="styleSheet">
     <string notr="true">QTableView {background-color: #2F2F2F; color: #edebeb;}</string>
    </property>
+  </widget>
+  <widget class="QLabel" name="projectTypeLable">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>150</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{ color: #C1C1C1; font: bold; text-decoration: underline;}</string>
+   </property>
+   <property name="text">
+    <string>Project Type:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="projectTypeComBox">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>170</y>
+     <width>111</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{background-color: #2F2F2F; color: #edebeb;}</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Regression</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Classification</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Deep Learning</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources>
