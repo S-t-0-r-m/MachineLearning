@@ -1,0 +1,69 @@
+
+QFrame#first_page{
+    border-top-left-radius: 25px; 
+    border-bottom-right-radius:25px; 
+    background: qlineargradient(spread:pad, x1: 0.5, y1: 0, x2: 0.5, y2: 1, stop: 0.05 hsl(213, 19%, 18%), stop: 1 hsl(213, 19%, 10%)); 
+}
+
+QLabel#page_heading{
+    text-align: center; 
+    color: white; 
+    border-top-left-radius: 25px;
+    background-color: hsl(216,12%,54%);
+}
+
+QPushButton#quit_btn{
+    border-radius: 12px;
+    border: solid white;
+    border-width: 1px 1px 1px 1px;
+    qproperty-iconSize: 24px;
+}
+
+QPushButton#quit_btn:hover{
+    background-color: red;
+}
+
+QLabel#path_head{
+    color: hsl(217, 12%, 80%);
+}
+
+QLabel#path_text {
+    text-align: center;
+    color: hsl(216, 12%, 54%);
+}
+
+QLineEdit#path_line_edit{
+    background-color: rgb(44, 20, 165);
+    border-radius: 12px;
+    color: hsl(216, 12%, 54%);
+}
+
+QPushButton#browse_btn{
+    background-color: rgb(44, 20, 165);
+    border-radius: 12px;
+    color: hsl(216, 12%, 54%);
+}
+
+QLabel#sep_head {
+    color: hsl(217, 12%, 80%)
+}
+
+QLabel#sep_text {
+    color: hsl(216, 12%, 54%);
+}
+
+QPushButton#sep_coma {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+QPushButton#sep_space {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+ 
+QPushButton#next_btn{
+    background-color: hsl(250, 78%, 22%);
+    color: hsl(216, 12%, 54%);
+    border-radius: 12px;
+}

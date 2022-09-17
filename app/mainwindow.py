@@ -1,5 +1,5 @@
 from app.sidebar_main import DeepSidebar, ClassSidebar, RegSidebar
-from app.new_project_dialog import NewProjectDialog
+from app.new_project_dialog import NewProjectDialog, FirstPage
 from dataset import Dataset
 import regression
 
@@ -7,6 +7,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 import sys
 import os
 
+very_light_blue =  "hsl(217, 12%, 80%)"
 light_grey = "hsl(217, 12%, 63%)"
 medium_grey = "hsl(216, 12%, 54%)"
 dark_blue = "hsl(213, 19%, 18%)"
@@ -30,6 +31,7 @@ class MainWindowMain(QtWidgets.QMainWindow):
         self.dataset = None
         self.current_mode = None
         self.regression_list = []
+        self.dialog = None
 
         window_elements = [
                 self.regression
@@ -39,8 +41,8 @@ class MainWindowMain(QtWidgets.QMainWindow):
         self.actionOpen_Project.triggered.connect(self.open_project)
 
     def open_new_project(self):
-        window = NewProjectDialog(self)
-        window.show()
+        self.dialog = NewProjectDialog()
+        self.dialog.show()
 
     def open_project(self):
         folderpath = str(

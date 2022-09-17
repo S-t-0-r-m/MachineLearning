@@ -1,0 +1,70 @@
+
+{
+"first_page":{
+    "type": "QFrame",
+    "border-top-left-radius": "25px;",
+    "border-bottom-right-radius": "25px;",
+    "background": "qlineargradient(spread:repeat, x1: 0.5, y1: 0, x2: 0.5, y2: 1, stop: 0.05 hsl(213,19%,18%), stop: 1 hsl(213,19%,10%));"
+    },
+"page_heading":{
+    "type": "QLabel",
+    "text-align": "center;",
+    "color": "hsl(217,12%,80%);",
+    "border-top-left-radius": "25px;",
+    "background-color": "hsl(216,12%,54%)"
+    },
+"path_head":{
+        "type": "QLabel",
+        "color": "hsl(217, 12%, 80%);"
+  },
+"path_text": {
+        "type": "QLabel",
+        "color": "hsl(216,12%,54%);"
+  },
+"path_line_edit" :{
+    "type": "QLineEdit",
+    "background-color": "rgb(44,20,165);",
+    "border-radius": "12px;",
+    "color": "hsl(216,12%,54%);"
+},
+"browse_btn":{
+        "type": "QPushButton",
+        "background-color": "rgb(44,20,165);",
+        "border-radius": "12px;",
+        "color": "hsl(216,12%,54%);"
+  },
+"sep_head": {
+    "type": "QLabel",
+    "color": "hsl(217, 12%, 80%);"
+},
+"sep_text": {
+    "type": "QLabel",
+    "color": "hsl(216,12%,54%);"
+},
+"sep_frame":{
+    "type": "QPushButton",
+    "background-color": "red"
+},
+"sep_coma":{
+    "type": "QPushButton",
+    "border-top-left-radius": "12px;",
+    "border-bottom-left-radius": "12px;"
+},
+"sep_space":{
+    "type": "QPushButton",
+    "border-top-right-radius": "12px;",
+    "border-bottom-right-radius": "12px;",
+    "border": "none;"
+},
+"quit_btn":{
+    "type": "QPushButton",
+    "background-image": "url(./resources/cross-circle.png);",
+    "border-radius": "12px;"
+},
+"next_btn":{
+    "type": "QPushButton",
+    "background-color": "hsl(250,78%,22%);",
+    "color": "hsl(216,12%,54%);",
+    "border-radius": "12px;"
+}
+}
