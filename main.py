@@ -2,14 +2,14 @@
 from app.mainwindow import MainWindowMain
 from PyQt5 import QtCore, QtWidgets
 import sys
+import os
 
+PATH = os.path.dirname(__file__)
 
 def main():
     mode = "app"
-    print("")
     if mode == "app":
         runapp()
-
 
 
 def runapp():
@@ -19,6 +19,7 @@ def runapp():
         QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
     root = QtWidgets.QApplication(sys.argv)
+    print(root.primaryScreen())
     window = MainWindowMain()
     window.show()
 
@@ -27,6 +28,3 @@ def runapp():
 
 if __name__ == "__main__":
     main()
-# with open(f"./app/style/new_project_style.json") as file:
-    #     self.style_dict = json.load(file)
-    # self.setStyleSheet(style.format_file(self.style_dict))

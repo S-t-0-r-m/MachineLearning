@@ -1,5 +1,5 @@
 from app.sidebar_main import DeepSidebar, ClassSidebar, RegSidebar
-from app.new_project_dialog import NewProjectDialog, FirstPage
+from app.new_project_dialog import NewProjectDialog
 from dataset import Dataset
 import regression
 
@@ -104,8 +104,11 @@ class MainWindowMain(QtWidgets.QMainWindow):
             if column != self.dataset.get_dependet_feature()
         ]
 
-    def print_me(self):
-        print("Print Me!")
+    # def closeEvent(self, event: QtGui.QCloseEvent) -> None:
+    #     if not self.dialog is None:
+    #         self.dialog.deleteLater()
+    #     return super().closeEvent(event)
+
 
     # def resizeEvent(self, event) -> None:
     #     self.height = event.size().height()

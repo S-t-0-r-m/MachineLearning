@@ -8,6 +8,7 @@ class Dataset:
         self.df = self.shuffle_dataframe(dataframe)
         self.normalised_df = self.normalise_dataframe(self.df)
         self.splitt_index = int(self.df.shape[0] * 0.3)
+        self.get_df()
 
     def shuffle_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.reindex(np.random.permutation(df.index))
@@ -15,6 +16,7 @@ class Dataset:
         return df
 
     def get_df(self, df_part="full") -> pd.DataFrame:
+        """No parameter will return complett dataframe"""
         if df_part == "train":
             return self.df[: self.splitt_index]
         elif df_part == "test":

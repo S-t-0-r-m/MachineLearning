@@ -1,3 +1,4 @@
+# self.verticalLayout.setAlignment(QtCore.Qt.AlignTop)
 import time
 from app.conten_frame import ContenFrame
 from functools import partial

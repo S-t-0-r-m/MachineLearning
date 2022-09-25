@@ -1,3 +1,6 @@
+*{
+    font-size: 9pt;
+}
 
 QFrame#first_page{
     border-top-left-radius: 25px; 
@@ -5,11 +8,21 @@ QFrame#first_page{
     background: qlineargradient(spread:pad, x1: 0.5, y1: 0, x2: 0.5, y2: 1, stop: 0.05 hsl(213, 19%, 18%), stop: 1 hsl(213, 19%, 10%)); 
 }
 
+QFrame#path_frame{
+    margin: 0px 0px 25px 0px;
+    
+}
+QFrame#sep_frame{
+    margin: 0px 0px 25px 0px; 
+}
+
 QLabel#page_heading{
+    font-weight:bold;
+    font-size: 12pt;
     text-align: center; 
     color: white; 
     border-top-left-radius: 25px;
-    background-color: hsl(216,12%,54%);
+    background-color: hsl(216,12%,35%);
 }
 
 QPushButton#quit_btn{
@@ -24,10 +37,14 @@ QPushButton#quit_btn:hover{
 }
 
 QLabel#path_head{
+    font-weight:bold;
+    font-size: 12pt;
     color: hsl(217, 12%, 80%);
+    
 }
 
 QLabel#path_text {
+    
     text-align: center;
     color: hsl(216, 12%, 54%);
 }
@@ -38,6 +55,7 @@ QLineEdit#path_line_edit{
     color: hsl(216, 12%, 54%);
 }
 
+
 QPushButton#browse_btn{
     background-color: rgb(44, 20, 165);
     border-radius: 12px;
@@ -45,11 +63,18 @@ QPushButton#browse_btn{
 }
 
 QLabel#sep_head {
+    background-color: red;
+    font-weight:bold;    
+    font-size: 12pt;
     color: hsl(217, 12%, 80%)
 }
 
 QLabel#sep_text {
+    background-color: red;
     color: hsl(216, 12%, 54%);
+}
+QFrame#sep_btn_frame{
+    background-color: red;
 }
 
 QPushButton#sep_coma {
@@ -63,7 +88,18 @@ QPushButton#sep_space {
 }
  
 QPushButton#next_btn{
+    height: 35px;
+    margin: 0px 200px 20px 200px;
     background-color: hsl(250, 78%, 22%);
     color: hsl(216, 12%, 54%);
     border-radius: 12px;
 }
+
+QPushButton#back_btn{
+    background-color: hsl(250, 78%, 22%);
+    color: hsl(216, 12%, 54%);
+    border-radius: 12px;
+}
+
+
+
